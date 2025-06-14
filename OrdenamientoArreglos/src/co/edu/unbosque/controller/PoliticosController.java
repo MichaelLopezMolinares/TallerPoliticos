@@ -1,9 +1,13 @@
 package co.edu.unbosque.controller;
 
 import co.edu.unbosque.model.Politico;
+import co.edu.unbosque.model.algoritmos.BubbleSort;
 import co.edu.unbosque.model.algoritmos.InsertionSort;
 import co.edu.unbosque.model.algoritmos.MergeSort;
 import co.edu.unbosque.model.algoritmos.QuickSort;
+import co.edu.unbosque.model.algoritmos.BubbleSort;
+import co.edu.unbosque.model.algoritmos.SelectionSort;
+
 import co.edu.unbosque.view.PoliticosGUI;
 import java.awt.ActiveEvent;
 import java.awt.event.*;
@@ -61,6 +65,14 @@ public class PoliticosController implements ActionListener{
 			
 			if(alg.equals("Insertion Sort")) {
 				resultados = InsertionSort.insertionSort(politicosOrdenados);
+				mostrarResultados(politicosOrdenados);
+			}
+			if(alg.equals("Bubble Sort")) {
+				resultados= BubbleSort.bubbleSort(politicosOrdenados);
+				mostrarResultados(politicosOrdenados);
+			}
+			if(alg.equals("Selection Sort")) {
+				resultados= SelectionSort.selectionSort(politicosOrdenados);
 				mostrarResultados(politicosOrdenados);
 			}
 			break;
