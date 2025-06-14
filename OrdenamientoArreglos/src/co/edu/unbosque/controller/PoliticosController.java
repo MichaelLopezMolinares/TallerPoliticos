@@ -1,6 +1,8 @@
 package co.edu.unbosque.controller;
 
 import co.edu.unbosque.model.Politico;
+import co.edu.unbosque.model.algoritmos.InsertionSort;
+import co.edu.unbosque.model.algoritmos.MergeSort;
 import co.edu.unbosque.model.algoritmos.QuickSort;
 import co.edu.unbosque.view.PoliticosGUI;
 import java.awt.ActiveEvent;
@@ -39,10 +41,26 @@ public class PoliticosController implements ActionListener{
 			
 		case "ORDENAR":
 			String alg = String.valueOf(vista.getPanelTop().getComboAlgoritmo().getSelectedItem());
+			Politico[] politicosOrdenados = politicosGenerados.clone();
+			
+			for(Politico pol : politicosOrdenados) {
+				System.out.println(pol.getId());
+			}
+			
+			System.out.println("---------------------");
 			
 			if(alg.equals("Quick Sort")) {
-				Politico[] politicosOrdenados = politicosGenerados.clone();
 				resultados = QuickSort.sort(politicosOrdenados, 0, (politicosOrdenados.length-1));
+				mostrarResultados(politicosOrdenados);
+			}
+			
+			if(alg.equals("Merge Sort")) {
+				resultados = MergeSort.mergeSort(politicosOrdenados, 0, (politicosOrdenados.length-1));
+				mostrarResultados(politicosOrdenados);
+			}
+			
+			if(alg.equals("Insertion Sort")) {
+				resultados = InsertionSort.insertionSort(politicosOrdenados);
 				mostrarResultados(politicosOrdenados);
 			}
 			break;
