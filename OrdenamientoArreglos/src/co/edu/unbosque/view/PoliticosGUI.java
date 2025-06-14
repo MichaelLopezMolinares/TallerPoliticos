@@ -36,5 +36,32 @@ public class PoliticosGUI extends JFrame {
         add(panelBottom, BorderLayout.SOUTH);     
 
     }
+
+	public PanelTop getPanelTop() {
+		return panelTop;
+	}
+
+	public void setPanelTop(PanelTop panelTop) {
+		this.panelTop = panelTop;
+	}
+
+	public PanelBottom getPanelBottom() {
+		return panelBottom;
+	}
+
+	public void setPanelBottom(PanelBottom panelBottom) {
+		this.panelBottom = panelBottom;
+	}
+
+	public PanelCenter getPanelCenter() {
+		return panelCenter;
+	}
+
+	public void setPanelCenter(PanelCenter panelCenter) {
+		this.panelCenter = panelCenter;
+	}
+    
+    
+    
 }
 

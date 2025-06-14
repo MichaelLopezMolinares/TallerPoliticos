@@ -31,6 +31,7 @@ public class PanelTop extends JPanel{
 
         // Botón generar y combos
         btnGenerar = new JButton("Generar Datos");
+        btnGenerar.setActionCommand("GENERAR");
         comboAlgoritmo = new JComboBox<>(new String[]{
             "Bubble Sort", "Selection Sort", "Insertion Sort", "Merge Sort", "Quick Sort"
         });
@@ -38,6 +39,7 @@ public class PanelTop extends JPanel{
             "Desordenado", "Parcialmente Ordenado", "Orden Inverso"
         });
         btnOrdenar = new JButton("Ordenar");
+        btnOrdenar.setActionCommand("ORDENAR");
 
         add(btnGenerar);
         add(comboAlgoritmo);
@@ -46,33 +48,47 @@ public class PanelTop extends JPanel{
 
         
 	}
-	
+
 	public JButton getBtnGenerar() {
 		return btnGenerar;
 	}
+
 	public void setBtnGenerar(JButton btnGenerar) {
 		this.btnGenerar = btnGenerar;
 	}
+
 	public JButton getBtnOrdenar() {
 		return btnOrdenar;
 	}
+
 	public void setBtnOrdenar(JButton btnOrdenar) {
 		this.btnOrdenar = btnOrdenar;
 	}
+
 	public JComboBox<String> getComboAlgoritmo() {
 		return comboAlgoritmo;
 	}
+
 	public void setComboAlgoritmo(JComboBox<String> comboAlgoritmo) {
 		this.comboAlgoritmo = comboAlgoritmo;
 	}
+
 	public JComboBox<String> getComboTipoArreglo() {
 		return comboTipoArreglo;
 	}
+
 	public void setComboTipoArreglo(JComboBox<String> comboTipoArreglo) {
 		this.comboTipoArreglo = comboTipoArreglo;
 	}
+
+	public JSpinner getSpinnerCantidad() {
+		return spinnerCantidad;
+	}
+
 	public void setSpinnerCantidad(JSpinner spinnerCantidad) {
 		this.spinnerCantidad = spinnerCantidad;
 	}
+	
+	
 	
 }
