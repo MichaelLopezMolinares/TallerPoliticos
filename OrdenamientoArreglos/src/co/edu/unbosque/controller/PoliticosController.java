@@ -1,6 +1,7 @@
 package co.edu.unbosque.controller;
 
 import co.edu.unbosque.model.Politico;
+import co.edu.unbosque.model.algoritmos.QuickSort;
 import co.edu.unbosque.view.PoliticosGUI;
 import java.awt.ActiveEvent;
 import java.awt.event.*;
@@ -14,6 +15,8 @@ import java.util.Random;
 public class PoliticosController implements ActionListener{
 
     private PoliticosGUI vista;
+    private static Politico[] politicosGenerados;
+    private static int[] resultados;
 
 	public PoliticosController(){
 		vista = new PoliticosGUI();
@@ -30,10 +33,18 @@ public class PoliticosController implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
 		case "GENERAR":
-			vista.getPanelCenter().fillTable(generarPoliticos());
+			generarPoliticos();
+			vista.getPanelCenter().fillTable(actualizarPoliticos(politicosGenerados));
 			break;
 			
 		case "ORDENAR":
+			String alg = String.valueOf(vista.getPanelTop().getComboAlgoritmo().getSelectedItem());
+			
+			if(alg.equals("Quick Sort")) {
+				Politico[] politicosOrdenados = politicosGenerados.clone();
+				resultados = QuickSort.sort(politicosOrdenados, 0, (politicosOrdenados.length-1));
+				mostrarResultados(politicosOrdenados);
+			}
 			break;
 			
 		}
@@ -50,9 +61,9 @@ public class PoliticosController implements ActionListener{
         return startDate.plusDays(randomDays);
     }
     
-	public List<Object[]> generarPoliticos() {
+	public void generarPoliticos() {
 		int quantity = (Integer)vista.getPanelTop().getSpinnerCantidad().getValue();
-		Politico[] politicosGenerados = new Politico[quantity];
+		politicosGenerados = new Politico[quantity];
 		
 		for(int i=0; i<quantity; i++) {
 			int dineroRobado = (int) (Math.random() * (1000000 - 100 + 1)) + 100;
@@ -61,13 +72,23 @@ public class PoliticosController implements ActionListener{
 			politicosGenerados[i] = aux;
 		}
 		
+	}
+	
+	public List<Object[]> actualizarPoliticos(Politico[] listaActual){
 		List<Object[]> filas = new ArrayList<>();
-		for (Politico p : politicosGenerados) {
+		for (Politico p : listaActual) {
 	        filas.add(new Object[]{p.getId(), p.getDineroRobado(), p.getFechaNacimiento()});
 	    }
 	    return filas;
 	}
-
+	
+	
+	public void mostrarResultados(Politico[] listaActual) {
+		vista.getPanelCenter().fillTable(actualizarPoliticos(listaActual));
+		vista.getPanelBottom().getLblTiempo().setText("Tiempo: " + resultados[2] + "ns");
+		vista.getPanelBottom().getLblComparaciones().setText("Comparaciones " + resultados[0]);
+		vista.getPanelBottom().getLblIntercambios().setText("Intercambios " + resultados[1]);
+	}
  
 
      
